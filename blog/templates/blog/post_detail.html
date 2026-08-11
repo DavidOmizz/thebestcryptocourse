@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} — {{ site_name }}{% endblock %}
+{% block content %}
+
+<div class="detail-wrap">
+  <a href="{% url 'blog:post_list' %}" class="back-link">&larr; Back to blog</a>
+  {% if post.category %}<div class="section-eyebrow">{{ post.category.name }}</div>{% endif %}
+  <h1>{{ post.title }}</h1>
+  <div class="body-copy">{{ post.body }}</div>
+</div>
+
+{% endblock %}

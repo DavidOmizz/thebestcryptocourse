@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Blog — {{ site_name }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="section-eyebrow">Blog</div>
+  <h1>From the blog</h1>
+  <p>Trading fundamentals, market psychology, and DeFi — explained without the jargon.</p>
+</div>
+
+<section style="border-top:none;">
+  <div class="grid-3">
+    {% for post in posts %}
+    <a href="{{ post.get_absolute_url }}" class="post-card">
+      <div class="post-thumb">
+        {% if post.image %}
+          <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% else %}
+          <img src="{% static 'images/blog-placeholder.png' %}" alt="Placeholder image">
+        {% endif %}
+        <!-- <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" stroke="#98A0A6" stroke-width="1.4"/><path d="M14 3v5h5" stroke="#98A0A6" stroke-width="1.4"/></svg> -->
+      </div>
+      <div class="post-body">
+        {% if post.category %}<div class="post-tag">{{ post.category.name }}</div>{% endif %}
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.excerpt }}</p>
+      </div>
+    </a>
+    {% empty %}
+    <p style="color:var(--text-muted)">No posts published yet — add one from /admin/.</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Courses — {{ site_name }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="section-eyebrow">Curriculum</div>
+  <h1>Learn through structured courses</h1>
+  <p>Pick a level and go — every course is self-paced and stays yours once you buy it.</p>
+</div>
+
+<section style="border-top:none;">
+  <div class="grid-3">
+    {% for course in courses %}
+    <a href="{{ course.get_absolute_url }}" class="course-card">
+      <div class="course-top">
+        <span class="level-tag">{{ course.get_level_display }}</span>
+      </div>
+      <h3>{{ course.title }}</h3>
+      <p class="desc">{{ course.description|truncatewords:18 }}</p>
+      <div class="course-meta"><span>{{ course.lesson_count }} lessons</span><span>{{ course.hours }}h total</span></div>
+      <div class="course-footer">
+        <div class="price"><span class="ccy">NGN</span>₦{{ course.price|floatformat:0 }}</div>
+        <span class="btn btn-primary btn-sm">View course</span>
+      </div>
+    </a>
+    {% empty %}
+    <p style="color:var(--text-muted)">No courses published yet — add one from /admin/.</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

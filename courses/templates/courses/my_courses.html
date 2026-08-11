@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}My Courses — {{ site_name }}{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="section-eyebrow">Your library</div>
+  <h1>My Courses</h1>
+  <p>Everything you've been granted access to.</p>
+</div>
+
+<section style="border-top:none;">
+  {% if accesses %}
+  <div class="grid-3">
+    {% for access in accesses %}
+    <a href="{{ access.course.get_absolute_url }}" class="course-card">
+      <div class="course-top"><span class="level-tag">{{ access.course.get_level_display }}</span></div>
+      <h3>{{ access.course.title }}</h3>
+      <p class="desc">{{ access.course.description|truncatewords:18 }}</p>
+      <div class="course-footer">
+        <span style="color:var(--mint); font-size:13px; font-weight:600;">● Access granted</span>
+        <span class="btn btn-primary btn-sm">Open</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state" style="text-align:center; padding:64px 20px; border:1px dashed var(--border); border-radius:12px;">
+    <h3 style="font-family:var(--font-display); font-size:19px; margin:0 0 8px;">No courses yet</h3>
+    <p style="color:var(--text-muted);">Buy a course and email your payment proof — it'll show up here once access is granted.</p>
+    <a href="{% url 'courses:course_list' %}" class="btn btn-primary" style="margin-top:16px;">Browse courses</a>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock %}
