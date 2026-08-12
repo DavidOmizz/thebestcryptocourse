@@ -39,7 +39,8 @@ SITE_NAME = 'TheBestCryptoCourse'
 # Where users are told to email their payment proof after sending crypto.
 # Change this via the PAYMENT_CONFIRMATION_EMAIL environment variable in
 # production -- no code change needed.
-PAYMENT_CONFIRMATION_EMAIL = os.environ.get("PAYMENT_CONFIRMATION_EMAIL", "payments@thebestcryptocourse.com")
+# PAYMENT_CONFIRMATION_EMAIL = os.environ.get("PAYMENT_CONFIRMATION_EMAIL", "payments@thebestcryptocourse.com")
+PAYMENT_CONFIRMATION_EMAIL = "davidomisakin4good@gmail.com"
 
 # Where Django sends people who need to log in, and where it sends them after
 # logging in / out.
