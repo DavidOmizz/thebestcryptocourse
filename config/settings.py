@@ -18,12 +18,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Locally, sensible defaults are used automatically so you can just run it.
 # ---------------------------------------------------------------------------
 
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    "django-insecure-dev-only-key-change-this-in-production",
-)
+# SECRET_KEY = os.environ.get(
+#     "SECRET_KEY",
+#     "django-insecure-dev-only-key-change-this-in-production",
+# )
 
-
+SECRET_KEY = '1tuzlj*^b5&+3+h73auw2-*e8fz3sw33tj&z8#&h=t5$*)y=_j'
 # DEBUG is True locally by default. On Railway, set DEBUG=False as an
 # environment variable -- never leave debug mode on in production.
 # DEBUG = os.environ.getS("DEBUG", "True") == "True"
@@ -33,7 +33,8 @@ ALLOWED_HOSTS = ['*']
 
 # Site display name -- shown in the header and page titles.
 # Change this in one place instead of hunting through templates.
-SITE_NAME = os.environ.get("SITE_NAME", "TheBestCryptoCourse")
+# SITE_NAME = os.environ.get("SITE_NAME", "TheBestCryptoCourse")
+SITE_NAME = 'TheBestCryptoCourse'
 
 # Where users are told to email their payment proof after sending crypto.
 # Change this via the PAYMENT_CONFIRMATION_EMAIL environment variable in
