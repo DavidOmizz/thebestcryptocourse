@@ -27,6 +27,7 @@ SECRET_KEY = '1tuzlj*^b5&+3+h73auw2-*e8fz3sw33tj&z8#&h=t5$*)y=_j'
 # DEBUG is True locally by default. On Railway, set DEBUG=False as an
 # environment variable -- never leave debug mode on in production.
 # DEBUG = os.environ.getS("DEBUG", "True") == "True"
+DEBUG = True
 
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 ALLOWED_HOSTS = ['*']
