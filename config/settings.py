@@ -23,6 +23,7 @@ SECRET_KEY = os.environ.get(
     "django-insecure-dev-only-key-change-this-in-production",
 )
 
+
 # DEBUG is True locally by default. On Railway, set DEBUG=False as an
 # environment variable -- never leave debug mode on in production.
 # DEBUG = os.environ.getS("DEBUG", "True") == "True"
