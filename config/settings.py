@@ -25,9 +25,10 @@ SECRET_KEY = os.environ.get(
 
 # DEBUG is True locally by default. On Railway, set DEBUG=False as an
 # environment variable -- never leave debug mode on in production.
-DEBUG = os.environ.get("DEBUG", "True") == "True"
+# DEBUG = os.environ.getS("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+ALLOWED_HOSTS = ['*']
 
 # Site display name -- shown in the header and page titles.
 # Change this in one place instead of hunting through templates.
