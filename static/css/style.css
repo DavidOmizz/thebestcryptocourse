@@ -139,3 +139,94 @@ footer.site{ border-top:1px solid var(--border); padding:32px 0 48px; color:var(
   .course-detail-grid{ grid-template-columns:1fr; }
   .stats-row{ gap:20px; }
 }
+
+
+
+/* ------------------------------ */
+.btc-section {
+    margin-top: 70px;
+    margin-bottom: 80px;
+}
+
+.btc-subtitle {
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.btc-price-box {
+    text-align: right;
+}
+
+#btc-price {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#btc-status {
+    display: block;
+    margin-top: 5px;
+    color: #16c784;
+    font-size: 12px;
+}
+
+.btc-timeframes {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.btc-timeframes button {
+    border: 1px solid rgba(255,255,255,0.08);
+    background: transparent;
+    color: var(--text-muted);
+    padding: 7px 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btc-timeframes button:hover {
+    color: white;
+    background: rgba(255,255,255,0.05);
+}
+
+.btc-timeframes button.active {
+    background: #f7931a;
+    color: white;
+    border-color: #f7931a;
+}
+
+.btc-chart-wrapper {
+    width: 100%;
+    height: 500px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.015);
+}
+
+#btc-chart {
+    width: 100%;
+    height: 100%;
+}
+
+
+@media (max-width: 600px) {
+
+    .btc-section {
+        margin-top: 50px;
+        margin-bottom: 60px;
+    }
+
+    .btc-chart-wrapper {
+        height: 400px;
+    }
+
+    #btc-price {
+        font-size: 18px;
+    }
+
+}
