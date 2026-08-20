@@ -80,7 +80,7 @@ section{ padding:56px 0; border-top:1px solid var(--border); }
 .page-header p{ color:var(--text-muted); font-size:16px; margin:0; }
 .section-eyebrow{ font-family:var(--font-mono); color:var(--mint); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; }
 .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:32px; flex-wrap:wrap; gap:10px; }
-.section-head h2{ font-family:var(--font-display); font-size:28px; margin:0; letter-spacing:-0.01em; font-weight:800; }
+.section-head h2{ font-family:var(--font-display); font-size:32px; margin:0; letter-spacing:-0.01em; font-weight:800; }
 .section-head .count{ font-family:var(--font-mono); font-size:12.5px; color:var(--text-muted); }
 
 /* ---------- grid ---------- */
@@ -268,4 +268,44 @@ footer.site{ border-top:1px solid var(--border); padding:32px 70px 48px; color:v
         font-size: 18px;
     }
 
+}
+
+
+
+
+/* -------------------------------------- */
+/* ---------- features section ---------- */
+.features-section{ text-align:center; }
+.features-section .section-head-centered{
+  max-width:640px; margin:0 auto 48px;
+}
+.features-section h2{
+  font-family:var(--font-display); font-weight:800;
+  font-size:clamp(28px, 3.6vw, 42px);
+  line-height:1.2; letter-spacing:-0.02em;
+  margin:0 0 16px;
+}
+.features-section h2 .grad{
+  background:linear-gradient(90deg, var(--mint), var(--gold));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.features-section > .section-head-centered p{
+  color:var(--text-muted); font-size:16px; line-height:1.6; margin:0;
+}
+.feature-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:26px; text-align:left;
+}
+.feature-icon{
+  width:48px; height:48px; border-radius:10px;
+  background:rgba(52,211,153,0.12);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:18px;
+}
+.feature-card h3{
+  font-family:var(--font-display); font-size:18px; font-weight:700;
+  margin:0 0 8px;
+}
+.feature-card p{
+  color:var(--text-muted); font-size:13.5px; line-height:1.6; margin:0;
 }
