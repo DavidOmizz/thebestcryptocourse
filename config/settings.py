@@ -32,6 +32,11 @@ DEBUG = True
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.ngrok-free.dev",
+]
+
+
 # Site display name -- shown in the header and page titles.
 # Change this in one place instead of hunting through templates.
 # SITE_NAME = os.environ.get("SITE_NAME", "TheBestCryptoCourse")
