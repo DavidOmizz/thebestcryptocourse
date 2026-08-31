@@ -67,6 +67,7 @@ class CryptoWallet(models.Model):
     """
     label = models.CharField(max_length=60, help_text="e.g. 'Bitcoin (BTC)' or 'USDT (TRC20)'")
     address = models.CharField(max_length=200)
+    qr_code = models.ImageField(upload_to="wallet_qr/", blank=True, null=True, help_text="Upload the QR code image the client gave you for this wallet.")
     network_note = models.CharField(
         max_length=200, blank=True,
         help_text="Optional warning shown under the address, e.g. 'TRC20 network only -- other networks will lose funds.'"

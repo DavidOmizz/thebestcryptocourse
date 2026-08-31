@@ -24,7 +24,8 @@
   </div>
 
   <div class="buy-card">
-    <div class="price"><span class="ccy">NGN</span>₦{{ course.price|floatformat:0 }}</div>
+    <!-- <div class="price"><span class="ccy">NGN</span>₦{{ course.price|floatformat:0 }}</div> -->
+    <div class="price"><span class="ccy"></span>${{ course.price|floatformat:0 }}</div>
     <div class="course-meta"><span>{{ course.lesson_count }} lessons</span><span>{{ course.hours }}h total</span></div>
 
     {% if not request.user.is_authenticated %}
@@ -49,14 +50,31 @@
       {# ---- Logged in, no access yet: show crypto payment instructions ---- #}
       <div class="section-eyebrow" style="margin-bottom:14px;">Pay with crypto</div>
       {% for wallet in wallets %}
-      <div style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:12px 14px; margin-bottom:10px;">
-        <div style="font-size:12px; color:var(--text-muted); margin-bottom:4px;">{{ wallet.label }}</div>
-        <div style="font-family:var(--font-mono); font-size:13px; word-break:break-all;">{{ wallet.address }}</div>
-        {% if wallet.network_note %}<div style="font-size:11.5px; color:var(--red); margin-top:6px;">{{ wallet.network_note }}</div>{% endif %}
-      </div>
-      {% empty %}
-      <p class="buy-note">Payment details are being set up — check back shortly.</p>
-      {% endfor %}
+<div class="wallet-card">
+  <div class="wallet-label">{{ wallet.label }}</div>
+
+  <div class="wallet-address-row">
+    <div class="addr" id="wallet-addr-{{ wallet.id }}">{{ wallet.address }}</div>
+    <button
+      type="button"
+      class="copy-btn"
+      onclick="copyWalletAddress(this, 'wallet-addr-{{ wallet.id }}')"
+      aria-label="Copy {{ wallet.label }} address">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+  </div>
+
+  {% if wallet.network_note %}<div class="wallet-network-note">{{ wallet.network_note }}</div>{% endif %}
+
+  {% if wallet.qr_code %}
+  <div class="wallet-qr">
+    <img src="{{ wallet.qr_code.url }}" alt="QR code for {{ wallet.label }}">
+  </div>
+  {% endif %}
+</div>
+{% empty %}
+<p class="buy-note">Payment details are being set up — check back shortly.</p>
+{% endfor %}
       <p class="buy-note" style="margin-top:16px;">
         After sending payment, email your proof to
         <strong style="color:var(--text);">{{ payment_email }}</strong>
@@ -66,5 +84,20 @@
     {% endif %}
   </div>
 </div>
+
+<script>
+function copyWalletAddress(btn, elId){
+  const text = document.getElementById(elId).textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = original;
+    }, 1800);
+  });
+}
+</script>
 
 {% endblock %}

@@ -19,7 +19,8 @@
       <p class="desc">{{ course.description|truncatewords:18 }}</p>
       <div class="course-meta"><span>{{ course.lesson_count }} lessons</span><span>{{ course.hours }}h total</span></div>
       <div class="course-footer">
-        <div class="price"><span class="ccy">NGN</span>₦{{ course.price|floatformat:0 }}</div>
+        <!-- <div class="price"><span class="ccy">NGN</span>₦{{ course.price|floatformat:0 }}</div> -->
+        <div class="price"><span class="ccy"></span>${{ course.price|floatformat:0 }}</div>
         <span class="btn btn-primary btn-sm">View course</span>
       </div>
     </a>
