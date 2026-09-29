@@ -84,23 +84,102 @@
 
 
 
+# This works but Production is not working because of the Binance API. I will comment out the code and use static data for now. I will fix it later.
+
+
+# from django.conf import settings
+# import requests
+
+
+# TICKER_COINS = [
+#     "BTCUSDT",
+#     "ETHUSDT",
+#     "BNBUSDT",
+#     "SOLUSDT",
+#     "XRPUSDT",
+#     "ADAUSDT",
+#     "DOGEUSDT",
+#     "AVAXUSDT",
+#     "LINKUSDT",
+#     "DOTUSDT",
+# ]
+
+
+# def site_settings(request):
+
+#     ticker_items = []
+
+#     try:
+
+#         response = requests.get(
+#             "https://api.binance.com/api/v3/ticker/24hr",
+#             params={
+#                 "symbols": '["BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT","XRPUSDT","ADAUSDT","DOGEUSDT","AVAXUSDT","LINKUSDT","DOTUSDT"]'
+#             },
+#             timeout=5
+#         )
+
+#         response.raise_for_status()
+
+#         data = response.json()
+
+#         for coin in data:
+
+#             symbol = coin["symbol"].replace("USDT", "")
+
+#             change = float(coin["priceChangePercent"])
+
+#             if change >= 0:
+#                 direction = "up"
+#                 value = f"▲ {change:.2f}%"
+#             else:
+#                 direction = "down"
+#                 value = f"▼ {abs(change):.2f}%"
+
+#             ticker_items.append(
+#                 (symbol, value, direction)
+#             )
+
+#     except Exception as e:
+
+#         print("BINANCE TICKER ERROR:", e)
+
+#         ticker_items = [
+#             ("BTC", "▲ --", "up"),
+#             ("ETH", "▲ --", "up"),
+#             ("BNB", "▲ --", "up"),
+#             ("SOL", "▲ --", "up"),
+#             ("XRP", "▲ --", "up"),
+#             ("ADA", "▲ --", "up"),
+#             ("DOGE", "▲ --", "up"),
+#             ("AVAX", "▲ --", "up"),
+#             ("LINK", "▲ --", "up"),
+#             ("DOT", "▲ --", "up"),
+#         ]
+
+#     return {
+#         "site_name": settings.SITE_NAME,
+#         "ticker_items": ticker_items,
+#     }
+
+
 
 from django.conf import settings
 import requests
 
 
-TICKER_COINS = [
-    "BTCUSDT",
-    "ETHUSDT",
-    "BNBUSDT",
-    "SOLUSDT",
-    "XRPUSDT",
-    "ADAUSDT",
-    "DOGEUSDT",
-    "AVAXUSDT",
-    "LINKUSDT",
-    "DOTUSDT",
-]
+TICKER_COINS = {
+    "bitcoin": "BTC",
+    "ethereum": "ETH",
+    "binancecoin": "BNB",
+    "solana": "SOL",
+    "ripple": "XRP",
+    "cardano": "ADA",
+    "dogecoin": "DOGE",
+    "avalanche-2": "AVAX",
+    "chainlink": "LINK",
+    "polkadot": "DOT",
+}
 
 
 def site_settings(request):
@@ -110,11 +189,19 @@ def site_settings(request):
     try:
 
         response = requests.get(
-            "https://api.binance.com/api/v3/ticker/24hr",
+            "https://api.coingecko.com/api/v3/coins/markets",
             params={
-                "symbols": '["BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT","XRPUSDT","ADAUSDT","DOGEUSDT","AVAXUSDT","LINKUSDT","DOTUSDT"]'
+                "vs_currency": "usd",
+                "ids": ",".join(TICKER_COINS.keys()),
+                "order": "market_cap_desc",
+                "per_page": 10,
+                "page": 1,
+                "sparkline": "false",
+                "price_change_percentage": "24h",
+                # "x_cg_demo_api_key": settings.COINGECKO_API_KEY,
+                "x_cg_demo_api_key": "CG-p5CMZHkc8RnahpTRxMTpFNB9",
             },
-            timeout=5
+            timeout=10
         )
 
         response.raise_for_status()
@@ -123,9 +210,17 @@ def site_settings(request):
 
         for coin in data:
 
-            symbol = coin["symbol"].replace("USDT", "")
+            symbol = TICKER_COINS.get(coin["id"])
 
-            change = float(coin["priceChangePercent"])
+            if not symbol:
+                continue
+
+            change = coin.get("price_change_percentage_24h")
+
+            if change is None:
+                continue
+
+            change = float(change)
 
             if change >= 0:
                 direction = "up"
@@ -140,7 +235,7 @@ def site_settings(request):
 
     except Exception as e:
 
-        print("BINANCE TICKER ERROR:", e)
+        print("COINGECKO TICKER ERROR:", e)
 
         ticker_items = [
             ("BTC", "▲ --", "up"),
