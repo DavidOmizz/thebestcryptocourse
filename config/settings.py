@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "cloudinary",
 
     # Local apps
     'core',
@@ -157,3 +158,13 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'          # collected here on deploy
 # }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+from pathlib import Path
+from dotenv import load_dotenv
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv()
+

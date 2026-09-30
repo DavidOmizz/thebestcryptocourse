@@ -41,9 +41,21 @@
         You have access
       </div>
       {% if course.materials_url %}
-        <a href="{{ course.materials_url }}" target="_blank" rel="noopener" class="btn btn-primary">Go to course materials →</a>
+        <!-- <a href="{{ course.materials_url }}" target="_blank" rel="noopener" class="btn btn-primary">Go to course materials →</a> -->
+         <div class="course-video">
+            <video
+                controls
+                controlsList="nodownload"
+                playsinline
+                preload="metadata"
+                style="width:100%; border-radius:12px;"
+            >
+                <source src="{{ course.materials_url.url }}" type="video/mp4">
+                Your browser does not support video playback.
+            </video>
+        </div>
       {% else %}
-        <p class="buy-note">Materials link is being set up — check back shortly, or reach out if it's been a while.</p>
+        <p class="buy-note">Materials link is being set up — check back shortly.</p>
       {% endif %}
 
     {% else %}

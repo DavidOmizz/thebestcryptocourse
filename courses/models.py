@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 
 class Course(models.Model):
@@ -23,10 +24,17 @@ class Course(models.Model):
     lesson_count = models.PositiveIntegerField(default=0, help_text="Shown as '8 lessons'.")
     hours = models.PositiveIntegerField(default=0, help_text="Shown as '4h total'.")
     price = models.DecimalField(max_digits=10, decimal_places=2, help_text="In Naira, e.g. 45000.00")
-    materials_url = models.URLField(
+    # materials_url = models.URLField(
+    #     blank=True,
+    #     help_text="Link to the actual course materials (e.g. a private Google Drive folder or "
+    #                "classroom link). Only shown to users you've granted access to below."
+    # )
+    materials_url = CloudinaryField(
+        "course video",
+        resource_type="video",
         blank=True,
-        help_text="Link to the actual course materials (e.g. a private Google Drive folder or "
-                   "classroom link). Only shown to users you've granted access to below."
+        null=True,
+        help_text="Upload the actual course video."
     )
     is_published = models.BooleanField(default=True, help_text="Uncheck to hide this course without deleting it.")
     order = models.PositiveIntegerField(default=0, help_text="Lower numbers show first. Use to control display order.")
