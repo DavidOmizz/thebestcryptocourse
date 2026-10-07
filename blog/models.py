@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -33,8 +34,7 @@ class Post(models.Model):
     )
     body = models.TextField(help_text="Full post content. Plain text or basic HTML.")
     is_published = models.BooleanField(default=True, help_text="Uncheck to hide this post from the site without deleting it.")
-    published_at = models.DateTimeField(auto_now_add=True)
-
+    published_at = models.DateTimeField(default=timezone.now)
     class Meta:
         ordering = ["-published_at"]
 

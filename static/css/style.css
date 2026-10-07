@@ -356,3 +356,19 @@ footer.site{ border-top:1px solid var(--border); padding:32px 70px 48px; color:v
   object-fit:contain;   /* this is what was causing the squish */
   display:block;
 }
+
+
+
+
+.post-image {
+  max-width: 720px;
+  margin: 0 auto 1.5rem;   /* centers it horizontally */
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

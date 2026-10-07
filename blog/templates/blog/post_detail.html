@@ -4,6 +4,11 @@
 
 <div class="detail-wrap">
   <a href="{% url 'blog:post_list' %}" class="back-link">&larr; Back to blog</a>
+  {% if post.image %}
+    <div class="post-image">
+      <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    </div>
+  {% endif %}
   {% if post.category %}<div class="section-eyebrow">{{ post.category.name }}</div>{% endif %}
   <h1>{{ post.title }}</h1>
   <div class="body-copy">{{ post.body }}</div>

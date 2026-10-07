@@ -1,6 +1,10 @@
 from django.contrib import admin
 from .models import Category, Post
 
+admin.site.site_header = "The Best Crypto Course"
+admin.site.site_title = "The Best Crypto Course Admin"
+admin.site.index_title = "Manage Your Website"
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
